@@ -1,0 +1,6 @@
+# Source deck and working notes contain client data: never commit them.
+ai-presentation/
+HANDOFF.md
+prompt.md
+node_modules/
+.DS_Store

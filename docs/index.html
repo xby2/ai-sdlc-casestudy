@@ -1451,14 +1451,6 @@ html.reveal-print .reveal .slides .pdf-page > section .fragment {
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 0:00 → 0:30</p>
-		<ul>
-			<li>Introduce yourself. Set expectations: about 40 minutes of walkthrough, then about 20 minutes of discussion. Say questions are welcome at the two pause points, and that the last 20 minutes are for discussion.</li>
-			<li>This is the longer version of the short talk from the meetup. Everything you'll see comes from our own repositories: git history, story folders and deploy tags, up to 20 October 2026.</li>
-			<li>The rail on the right is the loop every change goes through. We'll come back to it.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="The bet">
@@ -1483,16 +1475,6 @@ html.reveal-print .reveal .slides .pdf-page > section .fragment {
 			<span class="chip grey">Median build time: 7 days → 1.9 days</span>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 0:30 → 2:00</p>
-		<ul>
-			<li>In August we made a bet with two halves.</li>
-			<li>First: build and deliver a platform, a real product with real users.</li>
-			<li>Second, and the reason I'm here: find out whether AI agents can do most of the coding inside a process that is understandable, repeatable and documented, so other teams can use it.</li>
-			<li>Be upfront: we made the process up. It came from research (videos, articles, forums) and then two months of changing it. The question for the room is whether it generalises.</li>
-			<li>Tease the one number to remember: median build time fell from 7 days to 1.9. I'll come back to it with the data.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Team">
@@ -1517,14 +1499,6 @@ html.reveal-print .reveal .slides .pdf-page > section .fragment {
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 2:00 → 3:00</p>
-		<ul>
-			<li>Nobody on this team was an AI specialist. Five ordinary developers, off-the-shelf agents, no special tooling. That's the point: if we could do it, another team can repeat it.</li>
-			<li>Four of us used Claude Code and one used Codex. That's a useful test: the process shouldn't depend on one tool.</li>
-			<li>Everyone had access to agentic tools from the start. Teams in the same position get very different direction ("just use AI", "use it for testing", "use it for transcripts"). We chose to put a structured approach around it instead.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Agent guides">
@@ -1557,7 +1531,7 @@ flowchart LR
 				<div class="file quote">
 					<div class="fh">AGENTS.md<span class="meta">workspace · excerpts</span></div>
 					<div class="fb">
-						<p>Every implementation change … flows through the SDLC loop defined in jira/README.md</p>
+						<p>Every implementation change … flows through the SDLC loop defined in tickets/README.md</p>
 						<p>Nothing is implemented from an unapproved spec.</p>
 						<p>Small changes still get a story - a small change just gets a small spec.</p>
 						<p>Run the verification command of every repository changed by a task before presenting work</p>
@@ -1566,16 +1540,6 @@ flowchart LR
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 3:00 → 4:30</p>
-		<ul>
-			<li>What first made the agents useful is what makes a new hire useful: a good onboarding guide.</li>
-			<li>Claude Code reads CLAUDE.md and Codex reads AGENTS.md. Our CLAUDE.md just imports AGENTS.md, so both agents get identical instructions.</li>
-			<li>Each product repo adds its own guide: what to read before coding, conventions, and the verify command to run.</li>
-			<li>The excerpts on the right are verbatim. The rule about small changes matters: it stops "it's just a quick fix" from bypassing the process.</li>
-			<li>If asked: a guide for the runner repo is still in refinement, so it relies on the workspace guide for now.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Workspace repository">
@@ -1598,19 +1562,9 @@ flowchart LR
 		</div>
 		<p class="note" style="margin-top:18px">Repeatable: the process lives in a repository any team can adopt.</p>
 	</div>
-	<aside class="notes">
-		<p>⏱ 4:30 → 6:00</p>
-		<ul>
-			<li>We have three repositories with code: the application, the jobs, and the tools. A fourth, the workspace, holds the process: the ticket folder, the skills and the agent guides.</li>
-			<li>The three code repositories sit inside the workspace. We start AI sessions there, so when we refine a screen or an API change the agent has context across everything.</li>
-			<li>The rule: refine across repositories, but scope the work down to one repository per story. When something spans repositories, the agent creates dependencies between stories.</li>
-			<li>The process lives in a repository, so it's versioned, reviewed and changed through pull requests, like code.</li>
-			<li>Ask the room: how would this map onto your repositories?</li>
-		</ul>
-	</aside>
 </section>
 
-<section data-title="The loop" data-source="jira/README.md">
+<section data-title="The loop" data-source="tickets/README.md">
 	<div class="hd"><span>03</span><span class="sec">/</span><span>The loop</span></div>
 	<h2>Every change follows one loop, with two human gates</h2>
 	<div class="body">
@@ -1618,8 +1572,8 @@ flowchart LR
 <script type="text/mermaid" data-name="loop" data-max-scale="1.6">
 flowchart LR
 	R["<b>Refinement</b><br/>story + spec"] -- "Gate 1<br/>spec approved" --> Y["<b>Ready</b><br/>unblocked"]
-	Y -- "/next-jira<br/>plan approved" --> P["<b>In Progress</b><br/>story branch"]
-	P -- "/finish-jira<br/>evidence" --> V["<b>In Review</b><br/>code PR open"]
+	Y -- "/next-ticket<br/>plan approved" --> P["<b>In Progress</b><br/>story branch"]
+	P -- "/finish-ticket<br/>evidence" --> V["<b>In Review</b><br/>code PR open"]
 	V -- "Gate 2<br/>PR merged" --> D["<b>Done</b><br/>audit trail"]
 	classDef done fill:#2463eb,stroke:#2463eb,color:#ffffff
 	class D done
@@ -1630,19 +1584,8 @@ flowchart LR
 			<div class="card soft"><h3>Small changes still get a story</h3><p>A small change gets a small spec, not no spec.</p></div>
 			<div class="card soft"><h3>The story folder is the audit trail</h3><p>Story, spec, plan, test report and review stay with the work. Won't Do is the off-ramp.</p></div>
 		</div>
-		<p class="note" style="margin-top:14px"><b>Why a ticket folder</b>Our environment had no Jira for the agents, so <code>jira/</code> in the workspace plays that role. Statuses, dependencies and hand-off are what matter: if a session is lost, the agent picks up where it stopped.</p>
+		<p class="note" style="margin-top:14px"><b>Why a ticket folder</b>Our agents had no access to an external ticket system, so a <code>tickets/</code> folder in the workspace plays that role. Statuses, dependencies and hand-off are what matter: if a session is lost, the agent picks up where it stopped.</p>
 	</div>
-	<aside class="notes">
-		<p>⏱ 6:00 → 8:30</p>
-		<ul>
-			<li>Refinement: the developer drafts the story and spec with the agent. The spec ends with open questions, and those drive a team refinement session.</li>
-			<li>Gate 1: the team approves the spec, its PR merges, and the story is Ready.</li>
-			<li>In Progress: a developer picks the next unblocked Ready story. The agent writes a plan, the developer approves it, and the code is built on a story branch.</li>
-			<li>In Review: the agent runs the repo's verification, writes a test report and an adversarial review, and opens the code PR.</li>
-			<li>Gate 2: the PR is approved and merged, and the story is Done. Won't Do (added in October) is the off-ramp, with a date and a reason.</li>
-			<li>Why we modelled a ticketing system at all: our agents ran in an environment with no access to Jira, so we made a <code>jira/</code> folder with one folder per story. The value is the same as a real board: statuses, dependencies between stories, and hand-off. If a session dies in the middle, an agent can read the story folder and continue.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Who does what">
@@ -1657,14 +1600,14 @@ sequenceDiagram
 	actor Dev as Developer
 	participant AI as AI agent
 	actor Team as Team and architect
-	Dev->>AI: /create-jira
+	Dev->>AI: /create-ticket
 	AI-->>Dev: story.md + spec.md, open questions
 	Dev->>Team: refinement session
 	Team-->>Dev: Gate 1 · spec approved, Ready
-	Dev->>AI: /next-jira
+	Dev->>AI: /next-ticket
 	AI-->>Dev: plan.md for approval
 	Note over AI: builds and tests on the story branch
-	Dev->>AI: /finish-jira
+	Dev->>AI: /finish-ticket
 	AI-->>Team: test-report.md · review.md · PR
 	Team-->>Dev: Gate 2 · PR merged, Done
 </script>
@@ -1675,18 +1618,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 8:30 → 10:30</p>
-		<ul>
-			<li>Another way to see the loop: who does what.</li>
-			<li>People make every decision that matters: what to build, the answers to the spec's open questions, approving the plan, and approving the merge.</li>
-			<li>Agents do the drafting, planning, coding, testing and evidence-gathering.</li>
-			<li>This is where the title comes from. We don't steer the agent with clever prompts. We steer it with an approved spec, and we check its work against that spec.</li>
-			<li>A frank point from the first two months: AI hasn't made our jobs easier, it has made them different, and in some ways harder. Refinement with an agent expands a problem quickly: lots of edge cases, lots of documents.</li>
-			<li>Our guidance to the team: produce as much as you like, but you are responsible for your spec. Don't throw slop at your colleagues. A lot of our early work went into the spec-refinement skill: a short summary up front, charts, and a list of open questions, until the author is comfortable with it.</li>
-			<li>Team meetings changed too. Developers push specs forward with the agent between meetings, and the meeting becomes the place where open questions are answered and specs are verified.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Skills" data-source="process-workspace/.claude/skills">
@@ -1714,15 +1645,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 10:30 → 12:30</p>
-		<ul>
-			<li>Instead of a wiki page people may or may not read, the process is packaged as skills: instructions the agent loads when you run a command.</li>
-			<li>Three lifecycle skills drive a story through the ticket process. They hand the "how to do it well" parts to generic standards skills for tickets, specs, ticket flow, PRs, and backend and frontend code organization.</li>
-			<li>If you only take two skills from this talk: a ticketing system and a way to write a spec. A ticket system gives statuses, dependencies and hand-off. A spec skill gives every spec the same shape.</li>
-			<li>We stayed less prescriptive about the coding step itself: terminal or desktop app, a stronger model for planning and a cheaper one for implementing. People differ on that, so we focused on the specs.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Three commands">
@@ -1731,32 +1653,22 @@ sequenceDiagram
 	<div class="body">
 		<div class="terminal" style="max-width:1220px">
 			<div class="bar"><i></i><i></i><i></i><span>process-workspace — agent session</span></div>
-<pre><span class="blk"><span class="p">›</span> <span class="cmd">/create-jira</span> Redesign the Dashboard layouts from the approved mockups</span><span class="blk fragment"><span class="ok">  ✓</span> jira/story-a-ui-redesign/story.md and spec.md drafted on story-a-refinement
+<pre><span class="blk"><span class="p">›</span> <span class="cmd">/create-ticket</span> Redesign the Dashboard layouts from the approved mockups</span><span class="blk fragment"><span class="ok">  ✓</span> tickets/story-a-ui-redesign/story.md and spec.md drafted on story-a-refinement
 <span class="ok">  ✓</span> open questions listed for the refinement session</span>
-<span class="blk fragment"><span class="p">›</span> <span class="cmd">/next-jira</span> platform-app
+<span class="blk fragment"><span class="p">›</span> <span class="cmd">/next-ticket</span> application
 <span class="ok">  ✓</span> Story A is Ready and unblocked. Pick it up? <span class="cmd">yes</span>
 <span class="ok">  ✓</span> plan.md written: 14 tasks. Approve? <span class="cmd">yes</span>
 <span class="dim">  … implementing on branch story-a-ui-redesign</span></span>
-<span class="blk fragment"><span class="p">›</span> <span class="cmd">/finish-jira</span>
+<span class="blk fragment"><span class="p">›</span> <span class="cmd">/finish-ticket</span>
 <span class="ok">  ✓</span> npm run verify · npm run test:ui (140 unit, 29 UI tests passing)
 <span class="ok">  ✓</span> test-report.md and review.md recorded (adversarial review: 2 issues fixed)
 <span class="ok">  ✓</span> PR opened: Story A - implementation</span></pre>
 		</div>
 		<p class="illustrative">Reconstructed from the skill definitions and Story A's artifacts, not a recorded session.</p>
 	</div>
-	<aside class="notes">
-		<p>⏱ 14:00 → 16:00</p>
-		<ul>
-			<li>Day to day, this is roughly all a developer types. Click to step through it.</li>
-			<li>Be clear that this is illustrative: I've reconstructed it from the skill definitions and the real artifacts of the story I'm about to show. It isn't a screen recording.</li>
-			<li>Note the confirmations. The agent proposes and a person confirms: the pick, then the plan.</li>
-			<li>Because there's no live demo, walk through each line slowly. Say what a person decides at each step: the open questions, the pick, the plan, and later the merge.</li>
-			<li>Click through the three steps, then pause for questions before the case study.</li>
-		</ul>
-	</aside>
 </section>
 
-<section data-title="Case study: Story A" data-source="Workspace and platform-app git history, Story A story folder">
+<section data-title="Case study: Story A" data-source="Workspace and application git history, Story A story folder">
 	<div class="hd"><span>04</span><span class="sec">/</span><span>Case study</span><span class="tag">Case study · Story A</span></div>
 	<h2>A full UI redesign: one developer, four working days</h2>
 	<div class="body">
@@ -1796,17 +1708,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 16:00 → 18:30</p>
-		<ul>
-			<li>The case study: Story A, a redesign of the main Dashboard pages, done by one developer on the team.</li>
-			<li>Thursday lunchtime, the agent builds eight clickable mockup pages. About an hour later, after a design review, there's a second iteration.</li>
-			<li>Over the next working days the mockups were reviewed and the story and spec were drafted. Tuesday morning the team answered the spec's three open questions and it went Ready. That afternoon the agent wrote the plan.</li>
-			<li>Wednesday: implementation, verification, review, merge and deployment, all before 10:05.</li>
-			<li>From first mockup to deployed: four working days. Read the quote. This is the part that would normally take months and several people.</li>
-			<li>The mockup wasn't a picture. It was clickable HTML built on the real app stylesheet, so the team reviewed something very close to real. What shipped matches it: the test report puts 1920-pixel screenshots of every shipped page beside the matching mockup. (Real screens are withheld.)</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Produced vs decided" data-source="Story A: story.md, spec.md, plan.md, test-report.md, review.md">
@@ -1840,15 +1741,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 18:30 → 21:00</p>
-		<ul>
-			<li>This is "specs, not prompts" in one slide.</li>
-			<li>Left: everything the agent produced. Look at the plan: 2,190 lines, 14 tasks, and 13 places where the spec, the mockups or the code didn't line up, each written down for a person to approve.</li>
-			<li>Right: the decisions that came from people, mostly the spec's open questions, each offered with options and a recommendation.</li>
-			<li>The review found two real issues and fixed them, and it recorded a known limit (where keyboard focus lands after data loads) for us to accept rather than hiding it.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Ten weeks" data-source="Git history and deploy tags, 9 Aug – 20 Oct 2026">
@@ -1864,16 +1756,6 @@ sequenceDiagram
 			<div class="stat"><div class="v">5</div><div class="l">People</div><div class="s">using two AI agents: Claude Code and Codex</div></div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 21:00 → 22:30</p>
-		<ul>
-			<li>The headline numbers. I'll come back to each with a chart.</li>
-			<li>"Done" means merged and closed through our process. A release is one build deployed to all three environments (test, QA and user acceptance) together.</li>
-			<li>Remember 1.9 days: the median time from starting a story to merging it, in October.</li>
-			<li>Since this data was cut on 20 October the platform has been deployed to production, after code analysis and security review. The roughly 58,000 lines of source and tests written in this period are now production code. I'm not showing a lines-of-code chart, because lines measure output, not value.</li>
-			<li>The team started with six people on the project; the figures here count the five developers in the git history.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Throughput and build time" data-source="Story status history in git · working days (Mon–Fri), US Eastern · October counts 1–20 Oct">
@@ -1886,18 +1768,9 @@ sequenceDiagram
 		</div>
 		<p class="note" style="margin-top:16px"><b>Caveat</b>Build time runs from the first sign of work to the last implementation PR merged, and starts after the spec is approved. It does not include refinement. October's count covers 1–20 Oct.</p>
 	</div>
-	<aside class="notes">
-		<p>⏱ 22:30 → 24:30</p>
-		<ul>
-			<li>Left: August was set-up and nothing closed through the full process. September: 14 stories. October: 28 in just 14 working days, about 2 a day against 0.6 in September. Story counts ignore size, so read the trend, not the multiple.</li>
-			<li>Right: build time is from when work visibly starts to when the last implementation PR merges. Median: 7 working days in August, 3.1 in September, 1.9 in October.</li>
-			<li>Say the caveat clearly: this clock starts once a spec is approved. It does not include getting to an approved spec, and that is where the time went. Local work before the first commit is invisible, so these are lower bounds.</li>
-			<li>Lead time, from creating a story to Done, moved much less: 8.6 to 7.8 days. Hold that thought for the next slides.</li>
-		</ul>
-	</aside>
 </section>
 
-<section data-title="Releases" data-source="Deploy tags in platform-app · weeks start Monday">
+<section data-title="Releases" data-source="Deploy tags in application · weeks start Monday">
 	<div class="hd"><span>05</span><span class="sec">/</span><span>The evidence</span></div>
 	<h2>Releases rose from 3 to 20 a month</h2>
 	<div class="body">
@@ -1911,15 +1784,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 24:30 → 26:00</p>
-		<ul>
-			<li>Each bar is releases per week. A release is one build, deployed to all three environments together.</li>
-			<li>3 in August, 9 in September, 20 in the first 20 days of October.</li>
-			<li>The dashed line is 9 September, the first successful Jenkins integration. It's a product milestone, not the cause of the release rate: the deploys were already running.</li>
-			<li>The lesson behind this chart: in a client environment, spend the first effort getting a simple app through the client's pipeline (their registration, code analysis and review steps), even before it does much. Agents can't do the registrations, but once that path is open, merging a pull request deploys the app and the agents can turn out change after change. That's why releases keep climbing.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Where time goes" data-source="Medians in working days · stages measured separately">
@@ -1935,14 +1799,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 26:00 → 27:30</p>
-		<ul>
-			<li>Where does the time go? Median working days in each stage.</li>
-			<li>Refinement, from creating a story to Ready, takes about 4 days. Waiting for someone to pick it up takes essentially nothing. Building takes about 2 days, and closing out a couple of hours.</li>
-			<li>So the slowest stage isn't the agent writing code. It's people agreeing on what to build.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Code got cheap" data-source="Story milestones in git · status as of 20 Oct 2026">
@@ -1958,15 +1814,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 29:00 → 30:30</p>
-		<ul>
-			<li>The most important lesson in the deck. When the agent can build a Ready story in two days, the constraint moves.</li>
-			<li>The refinement backlog grew all through September and October. By 20 October, 38 stories were waiting in refinement with no work started, against 12 in flight and only 2 Ready.</li>
-			<li>Specs need decisions, and decisions need people's time: product owners, the architect, the team. Writing code is no longer what limits us. Deciding what to build is.</li>
-			<li>Pause for questions after this slide: this ends the evidence section.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Process changes as stories">
@@ -1983,14 +1830,6 @@ sequenceDiagram
 		</div>
 		<p class="note" style="margin-top:auto">Process changes came from across the team, through the same loop as product work.</p>
 	</div>
-	<aside class="notes">
-		<p>⏱ 32:00 → 33:30</p>
-		<ul>
-			<li>The important habit: a change to the process is a story, like any other. It has a spec, a review and a PR, and anyone on the team can propose one.</li>
-			<li>Pick one or two examples. Won't Do came from a real need: stories we decided not to build needed an honest way to close. Documentation depth came from agents over-documenting internal details for users.</li>
-			<li>Because the process is in skills and guides, a merged change takes effect in the very next agent session, for everyone.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Trust and accountability">
@@ -2010,16 +1849,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 33:30 → 36:00</p>
-		<ul>
-			<li>This came from a question at the meetup: is anything about all this uncomfortable? Accountability, comprehension, delegation?</li>
-			<li>Honest answer: it was a worry at the start, so some of us obsessed over code structure. Over time the output was generally fine, and we noticed ourselves getting more comfortable and looking less closely. That's the risk.</li>
-			<li>Guardrails that help: this is an internal tool, mostly used outside production; the spec and merge gates; adversarial review; code analysis and security review before production.</li>
-			<li>Discernment also moves up: with automation cheap, the valuable skill is deciding what is worth testing or building, not producing every possible case (the "haystack" problem).</li>
-			<li>Leave this as an open question for the discussion.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Lessons">
@@ -2033,14 +1862,6 @@ sequenceDiagram
 			<div><span class="n">04</span><h3>Treat the process as code</h3><p>Version it, review it, and change it through stories, so every change reaches every agent at once.</p></div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 36:00 → 37:30</p>
-		<ul>
-			<li>Four things about the process itself, in the order we learned them.</li>
-			<li>Spend the most time on 02. The spec is the contract: we obsessed over it, and most of the team's discussion time became verifying specs.</li>
-			<li>On 04: changing the process means training your agent too. A process change is a story, and the agent explains which of its own files need to change.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Lessons">
@@ -2053,15 +1874,6 @@ sequenceDiagram
 			<div><span class="n">07</span><h3>Hand off the workload, not the problem-solving</h3><p>Agents draft, build and check. People still own the problem, the spec and the merge, and the specs they write.</p></div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 37:30 → 39:30</p>
-		<ul>
-			<li>Three lessons about the organisation around the process.</li>
-			<li>05: plan for the bottleneck to move. AI will move as fast as you can move with it inside the process, so make time for refinement and decisions.</li>
-			<li>06: the early-CI point from the releases slide.</li>
-			<li>07: say it plainly. Then hand over to the next slide.</li>
-		</ul>
-	</aside>
 </section>
 
 <section data-title="Take it with you" data-source="sdlc-bootstrap skill">
@@ -2076,15 +1888,6 @@ sequenceDiagram
 		</div>
 		<p class="note" style="margin-top:auto">Repeatable: the process travels as skills, not as a wiki page. Re-run it after major process changes.</p>
 	</div>
-	<aside class="notes">
-		<p>⏱ 39:30 → 41:00</p>
-		<ul>
-			<li>This is how another team would adopt what you've seen today.</li>
-			<li><em>sdlc-bootstrap</em> is a one-time setup skill. It installs the generic standards skills, then interviews the team about how they work: repositories, statuses, gates and verification.</li>
-			<li>From those answers it generates the project's own lifecycle skills. The generic parts travel; the specifics are generated.</li>
-			<li>It can be re-run after major process changes. That leads straight into the first discussion question: is this generic?</li>
-		</ul>
-	</aside>
 </section>
 
 <section class="closing" data-title="Discussion">
@@ -2107,13 +1910,6 @@ sequenceDiagram
 			</div>
 		</div>
 	</div>
-	<aside class="notes">
-		<p>⏱ 41:00 → 60:00 (discussion)</p>
-		<ul>
-			<li>Say the one-line takeaway: agents write the code, people own the decisions, and when code is cheap, clarity is the constraint.</li>
-			<li>Then open the floor. Use the four questions as prompts, and let the conversation run.</li>
-		</ul>
-	</aside>
 </section>
 
 </div>
@@ -7529,7 +7325,7 @@ globalThis["mermaid"] = globalThis.__esbuild_esm_mermaid_nm["mermaid"].default;
 
 </script>
 <script>
-window.DECK_DATA = {"source":{"generatedAt":"2026-10-21T11:43-04:00","cutoff":"2026-10-20T23:59:59-04:00","startingPoint":"2026-08-09T08:46-04:00","jenkinsDay":"2026-09-09","restructureDay":"2026-09-03"},"kpis":{"storiesWritten":97,"storiesDone":42,"prs":99,"implPRs":70,"refinementPRs":29,"releases":32,"deployTags":96,"commits":610,"codeAdded":58171,"medianLead":8.2,"medianBuild":2,"medianRefinement":4,"medianWait":0.04,"medianCloseOut":0.2,"calendarDays":73,"workingDays":52},"statusCounts":{"Done":42,"Refinement":45,"In Review":2,"In Progress":3,"Ready":2,"Won't Do":3},"monthly":[{"label":"Aug","workingDays":21,"storiesCreated":11,"storiesReady":2,"storiesDone":0,"donePerWorkingDay":0,"medianBuild":7,"medianLead":null,"releases":3,"implPRs":9},{"label":"Sep","workingDays":22,"storiesCreated":42,"storiesReady":16,"storiesDone":14,"donePerWorkingDay":0.64,"medianBuild":3.1,"medianLead":8.6,"releases":9,"implPRs":26},{"label":"Oct (to 20th)","workingDays":14,"storiesCreated":44,"storiesReady":27,"storiesDone":28,"donePerWorkingDay":2,"medianBuild":1.9,"medianLead":7.8,"releases":20,"implPRs":35}],"weeks":["3 Aug","10 Aug","17 Aug","24 Aug","31 Aug","7 Sep","14 Sep","21 Sep","28 Sep","5 Oct","12 Oct","19 Oct"],"weekStarts":["2026-08-03","2026-08-10","2026-08-17","2026-08-24","2026-08-31","2026-09-07","2026-09-14","2026-09-21","2026-09-28","2026-10-05","2026-10-12","2026-10-19"],"releaseWeeks":[0,0,2,0,1,2,3,2,5,6,8,3],"growth":{"sizeByRepo":{"node":[6153,6153,6182,7176,8249,7489,8106,8698,13001,16249,26133,26106],"sdk":[1003,1003,1007,1028,2392,2711,3883,5562,9853,10890,10890,10890],"runner":[0,0,0,0,0,0,308,286,303,314,831,841],"workspace":[64,83,83,83,83,83,87,87,87,154,154,154]},"sizeTotal":[7220,7239,7272,8287,10724,10283,12384,14633,23244,27607,38008,37991],"baselineTotal":6928,"finalTotal":37991,"growthFactor":5.5,"cumulativeAdded":[548,569,1698,3711,9756,11091,16283,20943,35247,41653,58120,58171]},"flow":{"created":[0,1,0,10,1,5,13,14,20,13,18,2],"ready":[0,0,0,1,4,2,3,5,6,11,8,5],"started":[0,1,0,4,2,2,5,5,12,9,11,4],"done":[0,0,0,0,2,1,2,5,8,5,17,2],"wip":[0,1,1,5,5,5,8,8,12,17,10,12],"refinementBacklog":[0,0,0,6,5,9,17,26,34,37,42,38],"readyQueue":[0,0,0,0,0,0,0,0,0,0,0,2],"cumulativeDone":[0,0,0,0,2,3,5,10,18,23,40,42],"snapshot":{"refinementNoWork":38,"inFlight":12,"readyWaiting":2}},"adherence":{"nBefore":6,"nAfter":36,"all":{"n":42,"readyFirst":57,"plan":76,"review":76,"testReport":76,"inReview":24,"viaPR":100,"refinementPR":48,"docsTouched":26,"specStableAfterReady":52},"rows":[{"key":"viaPR","label":"Code merged through a PR","before":100,"after":100},{"key":"plan","label":"plan.md committed","before":17,"after":86},{"key":"review","label":"review.md committed","before":50,"after":81},{"key":"testReport","label":"test-report.md committed","before":67,"after":78},{"key":"readyFirst","label":"Ready before work started","before":17,"after":64},{"key":"refinementPR","label":"Spec approved through a PR","before":17,"after":53},{"key":"specStableAfterReady","label":"Spec unchanged after Ready","before":33,"after":56},{"key":"inReview","label":"In Review status recorded","before":17,"after":25}]},"evolution":[{"date":"2026-08-09","story":null,"title":"Workspace repository created"},{"date":"2026-08-11","story":null,"title":"Initial SDLC organization"},{"date":"2026-08-12","story":"Story I","title":"Ticket IDs adopted"},{"date":"2026-08-24","story":"Story I","title":"General-purpose agent skills adopted"},{"date":"2026-08-25","story":"Story I","title":"First create-jira skill"},{"date":"2026-09-03","story":"Story B","title":"SDLC restructured around wrapper and verb skills"},{"date":"2026-09-09","story":"Story D","title":"Codex configuration added"},{"date":"2026-09-14","story":"Story C","title":"First domain skill: design system"},{"date":"2026-09-21","story":"Story J","title":"Runner repository brought into the process"},{"date":"2026-09-29","story":"Story E","title":"Docs move into the platform; old wiki stand-in retired"},{"date":"2026-10-03","story":"Story K","title":"Guidance corrected for three repositories"},{"date":"2026-10-05","story":"Story D","title":"Claude-to-Codex skill sync script"},{"date":"2026-10-12","story":"Story F","title":"Won't Do status added"},{"date":"2026-10-15","story":"Story G","title":"Documentation audience and depth rules"},{"date":"2026-10-15","story":"Story H","title":"Human version of the depth rules"},{"date":"2026-10-19","story":"Story L","title":"Legacy repo-local Claude assets removed (in progress)"}]};
+window.DECK_DATA = {"source":{"generatedAt":"2026-10-21T11:43-04:00","cutoff":"2026-10-20T23:59:59-04:00","startingPoint":"2026-08-09T08:46-04:00","jenkinsDay":"2026-09-09","restructureDay":"2026-09-03"},"kpis":{"storiesWritten":97,"storiesDone":42,"prs":99,"implPRs":70,"refinementPRs":29,"releases":32,"deployTags":96,"commits":610,"codeAdded":58171,"medianLead":8.2,"medianBuild":2,"medianRefinement":4,"medianWait":0.04,"medianCloseOut":0.2,"calendarDays":73,"workingDays":52},"statusCounts":{"Done":42,"Refinement":45,"In Review":2,"In Progress":3,"Ready":2,"Won't Do":3},"monthly":[{"label":"Aug","workingDays":21,"storiesCreated":11,"storiesReady":2,"storiesDone":0,"donePerWorkingDay":0,"medianBuild":7,"medianLead":null,"releases":3,"implPRs":9},{"label":"Sep","workingDays":22,"storiesCreated":42,"storiesReady":16,"storiesDone":14,"donePerWorkingDay":0.64,"medianBuild":3.1,"medianLead":8.6,"releases":9,"implPRs":26},{"label":"Oct (to 20th)","workingDays":14,"storiesCreated":44,"storiesReady":27,"storiesDone":28,"donePerWorkingDay":2,"medianBuild":1.9,"medianLead":7.8,"releases":20,"implPRs":35}],"weeks":["3 Aug","10 Aug","17 Aug","24 Aug","31 Aug","7 Sep","14 Sep","21 Sep","28 Sep","5 Oct","12 Oct","19 Oct"],"weekStarts":["2026-08-03","2026-08-10","2026-08-17","2026-08-24","2026-08-31","2026-09-07","2026-09-14","2026-09-21","2026-09-28","2026-10-05","2026-10-12","2026-10-19"],"releaseWeeks":[0,0,2,0,1,2,3,2,5,6,8,3],"growth":{"sizeByRepo":{"node":[6153,6153,6182,7176,8249,7489,8106,8698,13001,16249,26133,26106],"sdk":[1003,1003,1007,1028,2392,2711,3883,5562,9853,10890,10890,10890],"runner":[0,0,0,0,0,0,308,286,303,314,831,841],"workspace":[64,83,83,83,83,83,87,87,87,154,154,154]},"sizeTotal":[7220,7239,7272,8287,10724,10283,12384,14633,23244,27607,38008,37991],"baselineTotal":6928,"finalTotal":37991,"growthFactor":5.5,"cumulativeAdded":[548,569,1698,3711,9756,11091,16283,20943,35247,41653,58120,58171]},"flow":{"created":[0,1,0,10,1,5,13,14,20,13,18,2],"ready":[0,0,0,1,4,2,3,5,6,11,8,5],"started":[0,1,0,4,2,2,5,5,12,9,11,4],"done":[0,0,0,0,2,1,2,5,8,5,17,2],"wip":[0,1,1,5,5,5,8,8,12,17,10,12],"refinementBacklog":[0,0,0,6,5,9,17,26,34,37,42,38],"readyQueue":[0,0,0,0,0,0,0,0,0,0,0,2],"cumulativeDone":[0,0,0,0,2,3,5,10,18,23,40,42],"snapshot":{"refinementNoWork":38,"inFlight":12,"readyWaiting":2}},"adherence":{"nBefore":6,"nAfter":36,"all":{"n":42,"readyFirst":57,"plan":76,"review":76,"testReport":76,"inReview":24,"viaPR":100,"refinementPR":48,"docsTouched":26,"specStableAfterReady":52},"rows":[{"key":"viaPR","label":"Code merged through a PR","before":100,"after":100},{"key":"plan","label":"plan.md committed","before":17,"after":86},{"key":"review","label":"review.md committed","before":50,"after":81},{"key":"testReport","label":"test-report.md committed","before":67,"after":78},{"key":"readyFirst","label":"Ready before work started","before":17,"after":64},{"key":"refinementPR","label":"Spec approved through a PR","before":17,"after":53},{"key":"specStableAfterReady","label":"Spec unchanged after Ready","before":33,"after":56},{"key":"inReview","label":"In Review status recorded","before":17,"after":25}]},"evolution":[{"date":"2026-08-09","story":null,"title":"Workspace repository created"},{"date":"2026-08-11","story":null,"title":"Initial SDLC organization"},{"date":"2026-08-12","story":"Story I","title":"Ticket IDs adopted"},{"date":"2026-08-24","story":"Story I","title":"General-purpose agent skills adopted"},{"date":"2026-08-25","story":"Story I","title":"First create-ticket skill"},{"date":"2026-09-03","story":"Story B","title":"SDLC restructured around wrapper and verb skills"},{"date":"2026-09-09","story":"Story D","title":"Codex configuration added"},{"date":"2026-09-14","story":"Story C","title":"First domain skill: design system"},{"date":"2026-09-21","story":"Story J","title":"Runner repository brought into the process"},{"date":"2026-09-29","story":"Story E","title":"Docs move into the platform; old wiki stand-in retired"},{"date":"2026-10-03","story":"Story K","title":"Guidance corrected for three repositories"},{"date":"2026-10-05","story":"Story D","title":"Claude-to-Codex skill sync script"},{"date":"2026-10-12","story":"Story F","title":"Won't Do status added"},{"date":"2026-10-15","story":"Story G","title":"Documentation audience and depth rules"},{"date":"2026-10-15","story":"Story H","title":"Human version of the depth rules"},{"date":"2026-10-19","story":"Story L","title":"Legacy repo-local Claude assets removed (in progress)"}]};
 </script>
 <script>
 /* Specs, Not Prompts - deck runtime.
